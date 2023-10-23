@@ -77,7 +77,7 @@ def main():
 
     args = args.parse_args()
 
-    output = args.output or args.file + '.out'
+    output = args.output or f'{args.file}.out'
     extension = args.file.split('.')[::-1][0].lower()
 
     if not find_executable('steghide'):
@@ -102,7 +102,7 @@ def main():
             f'extensions: {", ".join(Cracker.SUPPORTED_FILES)}')
 
     if not args.quiet:
-        log(f'Counting lines in wordlist..')
+        log('Counting lines in wordlist..')
         line_count = wc(args.wordlist)
     else:
         line_count = None

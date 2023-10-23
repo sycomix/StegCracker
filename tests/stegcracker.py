@@ -145,7 +145,7 @@ class CliTestCase(TestCase):
     def test_successful_crack(self):
         """Ensure a file can be cracked successfully"""
         directory = mkdtemp(prefix='stegcracker_')
-        file = directory + '/' + str(uuid4()) + '.txt'
+        file = f'{directory}/{str(uuid4())}.txt'
 
         try:
             stdout, stderr, code = self.call(FILE, WORDLIST, '--output', file)
@@ -160,7 +160,7 @@ class CliTestCase(TestCase):
     def test_successful_quiet_crack(self):
         """Ensure a file can be cracked successfully and not echo any output besides the valid password"""
         directory = mkdtemp(prefix='stegcracker_')
-        file = directory + '/' + str(uuid4()) + '.txt'
+        file = f'{directory}/{str(uuid4())}.txt'
 
         try:
             stdout, stderr, code = self.call(FILE, WORDLIST, '--output', file, '--quiet')
@@ -175,7 +175,7 @@ class CliTestCase(TestCase):
     def test_failed_crack(self):
         """Ensure that an error message is printed when no password is found"""
         directory = mkdtemp(prefix='stegcracker_')
-        file = directory + '/' + str(uuid4()) + '.txt'
+        file = f'{directory}/{str(uuid4())}.txt'
 
         try:
             stdout, stderr, code = self.call(FILE, WORDLIST_INVALID, '--output', file, '--quiet')
@@ -190,7 +190,7 @@ class CliTestCase(TestCase):
     def test_failed_quiet_crack(self):
         """Ensure that no error message is printed when no password is found and --quiet is enabled"""
         directory = mkdtemp(prefix='stegcracker_')
-        file = directory + '/' + str(uuid4()) + '.txt'
+        file = f'{directory}/{str(uuid4())}.txt'
 
         try:
             stdout, stderr, code = self.call(FILE, WORDLIST_INVALID, '--output', file, '--quiet')
@@ -205,7 +205,7 @@ class CliTestCase(TestCase):
     def test_verbose_output(self):
         """Ensure the steghide output is sent to STDERR when using --verbose"""
         directory = mkdtemp(prefix='stegcracker_')
-        file = directory + '/' + str(uuid4()) + '.txt'
+        file = f'{directory}/{str(uuid4())}.txt'
 
         err_message = 'steghide: could not extract any data with that passphrase'
         suc_message = 'wrote extracted data to '
@@ -228,9 +228,9 @@ class CliTestCase(TestCase):
         """Ensure that errors are handled gracefully inside threads"""
 
         directory = mkdtemp(prefix='stegcracker_')
-        file = directory + '/' + str(uuid4()) + '.txt'
+        file = f'{directory}/{str(uuid4())}.txt'
 
-        issue_url = stegcracker.__url__ + '/issues'
+        issue_url = f'{stegcracker.__url__}/issues'
 
         try:
             stdout, stderr, code = self.call(FILE, WORDLIST, '--output', file, '--verbose')

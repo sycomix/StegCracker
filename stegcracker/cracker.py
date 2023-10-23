@@ -62,7 +62,7 @@ class Cracker:
             f'on the official bug tracker: "{__url__}/issues" and don\'t forget '
             f'to include the following traceback:')
 
-        print(type(exc).__name__ + ': ' + str(exc), file=sys.stderr)
+        print(f'{type(exc).__name__}: {str(exc)}', file=sys.stderr)
         print_tb(exc.__traceback__, file=sys.stderr)
         self.has_error = True
         self.pool.terminate()
@@ -117,10 +117,12 @@ class Cracker:
                 self.attempts += attempts
                 percentage = self.attempts * 100 / self.line_count
 
-                print((
-                    f"{self.attempts}/{self.line_count} ({percentage:.2f}%) "
-                    f"Attempted: {password[0:20].ljust(20, ' ')}".strip()
-                ), end='\r', flush=True, file=sys.stderr)
+                print(
+                    f"{self.attempts}/{self.line_count} ({percentage:.2f}%) Attempted: {password[:20].ljust(20, ' ')}".strip(),
+                    end='\r',
+                    flush=True,
+                    file=sys.stderr,
+                )
 
                 self.lock.release()
 
